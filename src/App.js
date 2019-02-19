@@ -1,25 +1,43 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import request from 'request';
 
 class App extends Component {
+  constructor(props) {
+  super(props)
+this.setState({reddits:[]});
+}
+  state = {
+    reddits: []
+  };
+  componentDidMount = () => {
+    request.get({
+      headers: {
+          'content-type': 'application/json',
+      },
+      url: 'https://www.reddit.com/r/bobanholdingthings.json',
+    }, (error, response, body) => {
+      if(error) {
+        console.log(error);
+      }
+      else {
+        // console.log(JSON.parse(body).data.children);
+        this.setState({reddits: JSON.parse(body).data.children});
+      }
+    });
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="container">
+        <ul className="list-group list-group-flush">
+          {this.state.reddits.map(reddit => {
+            return <li className="list-group-item d-flex" key={reddit.data.id}>
+            <img src={reddit.data.thumbnail} alt="thumbnail" className="thumbnail"></img>
+            <div>{reddit.data.title}</div>
+            </li>
+          })}
+        </ul>
       </div>
     );
   }
