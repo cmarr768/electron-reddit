@@ -2,17 +2,21 @@
   "name": "electron-reddit",
   "version": "0.1.0",
   "private": true,
-  "main": "main.js",
+  "main": "public/main.js",
   "dependencies": {
+    "electron": "^4.0.5",
+    "electron-builder": "^20.38.5",
+    "electron-is-dev": "^1.0.1",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-scripts": "2.1.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-dev": "concurrently \"set BROWSER=none && npm run start\" \"wait-on http://localhost:3001 && electron .\""
   },
   "repository": {
     "type": "git",
@@ -32,5 +36,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "wait-on": "^3.2.0"
+  }
 }
