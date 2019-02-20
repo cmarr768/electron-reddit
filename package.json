@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/main.js",
+  "description": "reddit reader",
   "dependencies": {
     "electron-is-dev": "^1.0.1",
     "react": "^16.8.2",
@@ -11,22 +12,23 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"npm run start\" \"wait-on http://localhost:3001 && electron .\""
+    "react-start": "set PORT=3001 && react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "start": "concurrently \"npm run react-start\" \"wait-on http://localhost:3001 && electron .\"",
+    "electron-packager-win": "electron-packager . reddit-reader --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Reddit Reader\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cmarr768/electron-reddit.git"
   },
-  "author": "",
+  "author": "colin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/cmarr768/electron-reddit/issues"
   },
-  "homepage": "https://github.com/cmarr768/electron-reddit#readme",
+  "homepage": "./",
   "eslintConfig": {
     "extends": "react-app"
   },
