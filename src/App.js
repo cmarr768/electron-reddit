@@ -27,6 +27,7 @@ this.setState({reddits:[]});
       }
     });
   }
+  //this is a test
   render() {
     return (
       <div className="container">
